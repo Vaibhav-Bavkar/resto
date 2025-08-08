@@ -8,6 +8,7 @@ public class KhanaKhazanaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(KhanaKhazanaApplication.class, args);
+		System.out.println("Hello Wolrd");
 	}
 
 }
