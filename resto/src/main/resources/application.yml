@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: Restro Application
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/resto
+    username: myuser
+    password: mypassword
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+  database-platform: org.hibernate.dialect.PostgreSQLDialect
