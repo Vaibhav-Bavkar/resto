@@ -1,9 +1,9 @@
 package com.example.resto.repository;
 
-import com.example.resto.entity.TableDetails;
+import com.example.resto.entity.BookingDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface Table_repo extends JpaRepository<TableDetails,Integer> {
+public interface BookingRepo extends JpaRepository<BookingDetails,Integer> {
 }
