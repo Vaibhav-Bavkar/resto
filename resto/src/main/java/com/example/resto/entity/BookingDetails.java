@@ -1,6 +1,10 @@
 package com.example.resto.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Entity
@@ -9,6 +13,7 @@ public class BookingDetails {
     @Id
     @SequenceGenerator(name = "booking_id_seq", sequenceName = "booking_id_seq", allocationSize = 1, initialValue = 15)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_id_seq")
+    @Column(name="booking_id")
     private int booking_id;
 
     @Column(name = "rest_id")
