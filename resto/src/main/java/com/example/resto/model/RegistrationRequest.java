@@ -9,7 +9,7 @@ public class RegistrationRequest {
     private String name;
     private String email;
     private String password;
-    private BigInteger phonenumber;
+    private BigInteger phoneNumber;
 
 
 }

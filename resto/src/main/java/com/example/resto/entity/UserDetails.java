@@ -18,7 +18,7 @@ public class UserDetails {
     @SequenceGenerator(name="user_id_seq", sequenceName = "user_id_seq", allocationSize = 1, initialValue = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
     @Column(name="user_id")
-    private int user_id;
+    private int userId  ;
 
     @Column(name="name")
     private String name;
@@ -30,13 +30,6 @@ public class UserDetails {
     private String password;
 
     @Column(name="phn_num")
-    private BigInteger phone_num;
+    private BigInteger phoneNumber;
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
 }

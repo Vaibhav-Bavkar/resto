@@ -6,6 +6,9 @@ import com.example.resto.model.RestoUpdateRequest;
 import com.example.resto.repository.RestaurantRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Slf4j
 @Service
 public class RestaurantService {
@@ -16,34 +19,52 @@ public class RestaurantService {
         this.restaurantRepo = restaurantRepo;
     }
 
-    public String createrestoservice(RestaurantRequest restaurantRequest) {
+    public List<RestaurantDetails> getRestoService() {
+        log.info("Fetching all Restaurant");
+        return restaurantRepo.findAll();
+    }
+
+    public RestaurantDetails getRestoByIdService(int id) {
+        log.info("Fetching Restuarant by ID {}",id);
+        return restaurantRepo.findById(id).get();
+    }
+
+    public String createRestoService(RestaurantRequest restaurantRequest) {
+        log.info("Creating restuarant with with request {}",restaurantRequest);
+
+        if (restaurantRepo.findByName(restaurantRequest.getName()) != null) {
+            throw new RuntimeException("Restaurant already exists with name: " + restaurantRequest.getName());
+        }
+
         RestaurantDetails restaurantDetails=RestaurantDetails.builder()
                 .name(restaurantRequest.getName())
                 .address(restaurantRequest.getAddress())
                 .cuisine(restaurantRequest.getCuisine())
-                .open_time(restaurantRequest.getOpen_time())
-                .close_time(restaurantRequest.getClose_time())
-                .no_of_tables(restaurantRequest.getNo_of_tables())
+                .openTime(restaurantRequest.getOpenTime())
+                .closeTime(restaurantRequest.getCloseTime())
+                .noOfTables(restaurantRequest.getNoOfTables())
                 .build();
 
         restaurantRepo.save(restaurantDetails);
 
-        return "resto saved";
+        return "resto saved with rest Id:"+restaurantDetails.getRestId();
     }
 
-    public String updaterestoservice(RestoUpdateRequest restoUpdateRequest) {
+    public String updateRestoService(RestoUpdateRequest restoUpdateRequest) {
+        log.warn("Restaurant Updated {}",restoUpdateRequest);
         RestaurantDetails restaurantDetails=restaurantRepo.findByName(restoUpdateRequest.getName());
 
-        restaurantDetails.setOpen_time(restoUpdateRequest.getOpen_time());
-        restaurantDetails.setClose_time(restoUpdateRequest.getClose_time());
-        restaurantDetails.setNo_of_tables(restoUpdateRequest.getNo_of_tables());
+        restaurantDetails.setOpenTime(restoUpdateRequest.getOpen_time());
+        restaurantDetails.setCloseTime(restoUpdateRequest.getClose_time());
+        restaurantDetails.setNoOfTables(restoUpdateRequest.getNo_of_tables());
 
         restaurantRepo.save(restaurantDetails);
         return "resto updated";
 
     }
 
-    public String deleterestoservice(String name) {
+    public String deleteRestoService(String name) {
+        log.error("Deleting Restaurant {}",name);
         RestaurantDetails restaurantDetails=restaurantRepo.findByName(name);
         restaurantRepo.delete(restaurantDetails);
         return "Resto deleted";

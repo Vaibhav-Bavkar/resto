@@ -1,39 +1,38 @@
 package com.example.resto.entity;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+@Data
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="booking_details")
 public class BookingDetails {
     @Id
-    @SequenceGenerator(name = "booking_id_seq", sequenceName = "booking_id_seq", allocationSize = 1, initialValue = 15)
+    @SequenceGenerator(name = "booking_id_seq", sequenceName = "booking_id_seq", allocationSize = 1, initialValue = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_id_seq")
     @Column(name="booking_id")
-    private int booking_id;
+    private int bookingId;
 
-    @Column(name = "rest_id")
-    private int rest_id;
+    @ManyToOne
+    @JoinColumn(name="booking_rest_fk", referencedColumnName = "rest_id")
+    private RestaurantDetails restId;
 
-    @Column(name = "user_id")
-    private int user_id;
+    @ManyToOne
+    @JoinColumn(name="booking_user_fk", referencedColumnName ="user_id")
+    private UserDetails userId;
 
-    @Column(name = "table_id")
-    private int table_id;
-
-    @Column(name = "open_time")
-    private String open_time;
-
-    @Column(name = "close_time")
-    private String close_time;
-
-    @Column(name = "status")
-    private String status;
+    @Column(name="date")
+    private LocalDate Date;
 
     @Column(name = "people")
-    private String people;
+    private int people;
 }

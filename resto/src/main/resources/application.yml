@@ -3,7 +3,7 @@ spring:
     name: Restro Application
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/resto
+    url: jdbc:postgresql://localhost:5433/resto
     username: myuser
     password: mypassword
     driver-class-name: org.postgresql.Driver
